@@ -1,6 +1,7 @@
 from typing import List, Dict
 from .jobs import read
 
+
 def get_unique_industries(path: str) -> List[str]:
     jobs_reader = read(path)
     jobs_industry = set()
