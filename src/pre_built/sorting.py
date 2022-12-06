@@ -95,3 +95,5 @@ def sort_by(jobs: List[Dict], criteria: str) -> None:
     reverse = criteria in ["max_salary", "date_posted"]
 
     jobs.sort(key=key, reverse=reverse)
+
+    # comentei aqui
