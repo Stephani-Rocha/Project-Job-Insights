@@ -22,21 +22,27 @@ def get_min_salary(path: str) -> int:
     return min_salary
 
 
-def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
-    dict_salary = job
-    searched_salary = salary
-
-    if dict_salary.get("min_salary") == None or dict_salary.get("max_salary") == None:
+def validate_min_salary_and_max_salary(job: Dict) -> ValueError:
+    if job.get("min_salary") is None or job.get("max_salary") is None:
         raise ValueError("Chave min_salary ou max_salary inexistente")
-    if str(dict_salary["min_salary"]).isdigit() == False:
+    if not str(job["min_salary"]).isdigit():
         raise ValueError("min_salary contém valores não numéricos")
-    if str(dict_salary["max_salary"]).isdigit() == False:
+    if not str(job["max_salary"]).isdigit():
         raise ValueError("max_salary contém valores não numéricos")
-    if int(dict_salary["min_salary"]) > int(dict_salary["max_salary"]):
+    if int(job["min_salary"]) > int(job["max_salary"]):
         raise ValueError("min_salary não pode ser menor que max_salary")
-    if str(searched_salary).lstrip('-').isdigit() == False:
+
+
+def validate_salary(salary: Union[int, str]) -> ValueError:
+    if not str(salary).lstrip('-').isdigit():
         raise ValueError("salary contém valores não numéricos")
-    return int(dict_salary['min_salary']) <= int(searched_salary) <= int(dict_salary['max_salary'])     
+
+
+def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
+    validate_min_salary_and_max_salary(job)
+    validate_salary(salary)
+    return int(job['min_salary']) <= int(salary) <= int(job['max_salary'])
+
 
 def filter_by_salary_range(
     jobs: List[dict],
