@@ -21,7 +21,7 @@ def get_min_salary(path: str) -> int:
     min_salary = min(salaries)
     return min_salary
 
-
+# Essa função tem como objetivo fazer validações referente a min_salary e max_salary
 def validate_min_salary_and_max_salary(job: Dict) -> ValueError:
     if job.get("min_salary") is None or job.get("max_salary") is None:
         raise ValueError("Chave min_salary ou max_salary inexistente")
@@ -32,7 +32,7 @@ def validate_min_salary_and_max_salary(job: Dict) -> ValueError:
     if int(job["min_salary"]) > int(job["max_salary"]):
         raise ValueError("min_salary não pode ser menor que max_salary")
 
-
+# Essa função tem como objetivo fazer validações referente a salary
 def validate_salary(salary: Union[int, str]) -> ValueError:
     if not str(salary).lstrip('-').isdigit():
         raise ValueError("salary contém valores não numéricos")
@@ -49,18 +49,11 @@ def filter_by_salary_range(
     salary: Union[str, int]
 ) -> List[Dict]:
 
-    """Filters a list of jobs by salary range
-
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    raise NotImplementedError
+    job_list = list()
+    for job in jobs:
+        try:
+            if matches_salary_range(job, salary) is True:
+                job_list.append(job)
+        except ValueError:
+            print(ValueError)
+    return job_list
