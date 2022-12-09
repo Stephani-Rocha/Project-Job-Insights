@@ -21,7 +21,10 @@ def get_min_salary(path: str) -> int:
     min_salary = min(salaries)
     return min_salary
 
-# Essa função tem como objetivo fazer validações referente a min_salary e max_salary
+# Essa função tem como objetivo fazer validações
+# referente a min_salary e max_salary
+
+
 def validate_min_salary_and_max_salary(job: Dict) -> ValueError:
     if job.get("min_salary") is None or job.get("max_salary") is None:
         raise ValueError("Chave min_salary ou max_salary inexistente")
@@ -32,7 +35,10 @@ def validate_min_salary_and_max_salary(job: Dict) -> ValueError:
     if int(job["min_salary"]) > int(job["max_salary"]):
         raise ValueError("min_salary não pode ser menor que max_salary")
 
-# Essa função tem como objetivo fazer validações referente a salary
+# Essa função tem como objetivo fazer validações
+# referente a salary
+
+
 def validate_salary(salary: Union[int, str]) -> ValueError:
     if not str(salary).lstrip('-').isdigit():
         raise ValueError("salary contém valores não numéricos")
